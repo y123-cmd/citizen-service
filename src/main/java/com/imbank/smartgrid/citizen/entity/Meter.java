@@ -2,6 +2,7 @@ package com.imbank.smartgrid.citizen.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "meter")
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Meter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
