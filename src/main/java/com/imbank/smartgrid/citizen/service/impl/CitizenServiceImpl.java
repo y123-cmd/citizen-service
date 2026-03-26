@@ -47,6 +47,14 @@ public class CitizenServiceImpl implements CitizenService {
         Citizen citizen = citizenMapper.toEntity(request, citizenId, meterId);
         Citizen savedCitizen = citizenRepository.save(citizen);
 
+        Meter meter = new Meter();
+        meter.setMeterId(meterId);
+        meter.setCitizenId(citizenId);
+        meter.setProviderName(request.getProviderName());
+        meter.setMeterType(request.getMeterType());
+        meterRepository.save(meter);
+
+
         log.info("Citizen registered successfully with citizenId: {}", citizenId);
         return citizenMapper.toResponse(savedCitizen);
     }
