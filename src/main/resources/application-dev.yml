@@ -23,3 +23,6 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
+
+  callback:
+    secret: smartgrid-callback-secret-2024

@@ -60,4 +60,13 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ApiResponse<>(500, "An unexpected error occurred", null));
     }
+    @ExceptionHandler(InvalidCallbackSecretException.class)
+    public ResponseEntity<ApiResponse<Void>>handleInvalidCallbackSecretException(
+            InvalidCallbackSecretException ex){
+        log.warn("Invalid callback secret: {}", ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(new ApiResponse<>(401, ex.getMessage(), null));
+    }
+
 }
