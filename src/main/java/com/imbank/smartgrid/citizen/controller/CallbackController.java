@@ -22,7 +22,7 @@ public class CallbackController {
             @Valid @RequestBody CallbackRequest request) {
         log.info("Received callback for citizenId: {} status: {}",
                 request.getCitizenId(), request.getStatus());
-        callbackService.processCallback(secret, request);
+        callbackService.processCallBack(secret, request);
         return ResponseEntity.ok(new ApiResponse<>(200, "Callback processed successfully", null));
     }
 }
