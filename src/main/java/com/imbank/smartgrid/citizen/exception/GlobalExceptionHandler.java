@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
@@ -75,6 +76,20 @@ public class GlobalExceptionHandler {
             NoResourceFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ApiResponse<>(404, ex.getMessage(), null));
+    }
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    public ResponseEntity<ApiResponse<Void>> handleMissingRequestHeader(
+            MissingRequestHeaderException ex) {
+
+        String errorMessage = "Required request header '" + ex.getHeaderName() + "' is missing";
+
+        ApiResponse<Void> response = new ApiResponse<>(
+                HttpStatus.BAD_REQUEST.value(),
+                errorMessage,
+                null
+        );
+
+        return ResponseEntity.badRequest().body(response);
     }
 
 }
