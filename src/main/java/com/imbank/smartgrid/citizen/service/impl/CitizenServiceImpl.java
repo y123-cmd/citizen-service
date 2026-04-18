@@ -134,6 +134,7 @@ public class CitizenServiceImpl implements CitizenService {
         request.setCitizenId(citizenId);
         request.setProviderName(citizen.getProviderName().name());
         request.setConsumptionKwh(consumptionKwh);
+        request.setCurrentReading(newReading);
         request.setReadingType(citizen.getMeterType() == MeterType.AUTOMATED ? "AUTOMATED" : "MANUAL");
         request.setReadingDate(LocalDateTime.now());
 
